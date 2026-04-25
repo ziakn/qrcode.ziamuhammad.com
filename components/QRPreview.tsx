@@ -95,7 +95,7 @@ export function QRPreview() {
             Download SVG
           </button>
           <button id="btn-copy" onClick={copyContent} className="btn-secondary">
-            {copied ? "Copied content" : "Copy content"}
+            {copied ? "Copied" : "Copy content"}
           </button>
         </div>
       )}

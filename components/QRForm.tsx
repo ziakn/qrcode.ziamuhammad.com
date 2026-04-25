@@ -25,7 +25,7 @@ function Input({
   type = "text",
 }: {
   id: string;
-  value: string;
+  value: string | undefined;
   onChange: (v: string) => void;
   placeholder?: string;
   type?: string;
@@ -34,7 +34,7 @@ function Input({
     <input
       id={id}
       type={type}
-      value={value}
+      value={value || ""}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       className="input"
@@ -52,7 +52,7 @@ function Textarea({
   rows = 4,
 }: {
   id: string;
-  value: string;
+  value: string | undefined;
   onChange: (v: string) => void;
   placeholder?: string;
   rows?: number;
@@ -60,7 +60,7 @@ function Textarea({
   return (
     <textarea
       id={id}
-      value={value}
+      value={value || ""}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       rows={rows}
@@ -76,14 +76,14 @@ function Select({
   options,
 }: {
   id: string;
-  value: string;
+  value: string | undefined;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
 }) {
   return (
     <select
       id={id}
-      value={value}
+      value={value || ""}
       onChange={(e) => onChange(e.target.value)}
       className="input select"
     >
@@ -99,7 +99,7 @@ function Select({
 export function QRForm() {
   const { data, setField } = useQRStore();
 
-  if (data.type === "url") {
+  if (data.type === "URL") {
     return (
       <div className="form-fields">
         <Field label="Website URL">
@@ -115,7 +115,7 @@ export function QRForm() {
     );
   }
 
-  if (data.type === "text") {
+  if (data.type === "Text") {
     return (
       <div className="form-fields">
         <Field label="Text Content">
@@ -130,7 +130,7 @@ export function QRForm() {
     );
   }
 
-  if (data.type === "wifi") {
+  if (data.type === "WiFi") {
     return (
       <div className="form-fields">
         <Field label="Network Name (SSID)">
@@ -151,34 +151,28 @@ export function QRForm() {
           />
         </Field>
         <Field label="Security Type">
-          <Select
-            id="qr-security"
-            value={data.security}
-            onChange={(v) => setField("security", v as "WPA" | "WEP" | "nopass")}
-            options={[
+          <div className="segmented-control">
+            {[
               { value: "WPA", label: "WPA/WPA2" },
               { value: "WEP", label: "WEP" },
-              { value: "nopass", label: "No Password" },
-            ]}
-          />
+              { value: "nopass", label: "No Pass" },
+            ].map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                className={`seg-btn${data.security === opt.value ? " active" : ""}`}
+                onClick={() => setField("security", opt.value as any)}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
         </Field>
-        <div className="toggle-row">
-          <span className="field-label">Hidden Network</span>
-          <button
-            id="qr-hidden-toggle"
-            role="switch"
-            aria-checked={data.hidden}
-            onClick={() => setField("hidden", !data.hidden)}
-            className={`toggle${data.hidden ? " on" : ""}`}
-          >
-            <span className="toggle-thumb" />
-          </button>
-        </div>
       </div>
     );
   }
 
-  if (data.type === "email") {
+  if (data.type === "Email") {
     return (
       <div className="form-fields">
         <Field label="To">
@@ -211,7 +205,7 @@ export function QRForm() {
     );
   }
 
-  if (data.type === "phone") {
+  if (data.type === "Phone") {
     return (
       <div className="form-fields">
         <Field label="Phone Number">
@@ -227,69 +221,98 @@ export function QRForm() {
     );
   }
 
-  if (data.type === "vcard") {
+  if (data.type === "vCard") {
     return (
       <div className="form-fields">
-        <div className="field-row">
-          <Field label="First Name">
-            <Input
-              id="qr-first-name"
-              value={data.firstName}
-              onChange={(v) => setField("firstName", v)}
-              placeholder="John"
-            />
-          </Field>
-          <Field label="Last Name">
-            <Input
-              id="qr-last-name"
-              value={data.lastName}
-              onChange={(v) => setField("lastName", v)}
-              placeholder="Doe"
-            />
-          </Field>
-        </div>
-        <Field label="Organization">
-          <Input
-            id="qr-org"
-            value={data.org}
-            onChange={(v) => setField("org", v)}
-            placeholder="Acme Corp"
-          />
+        <Field label="First Name">
+          <Input id="qr-fn" value={data.firstName} onChange={(v) => setField("firstName", v)} placeholder="John" />
         </Field>
-        <Field label="Job Title">
-          <Input
-            id="qr-job-title"
-            value={data.jobTitle}
-            onChange={(v) => setField("jobTitle", v)}
-            placeholder="Software Engineer"
-          />
+        <Field label="Last Name">
+          <Input id="qr-ln" value={data.lastName} onChange={(v) => setField("lastName", v)} placeholder="Doe" />
+        </Field>
+        <Field label="Organization">
+          <Input id="qr-org" value={data.org} onChange={(v) => setField("org", v)} placeholder="Acme Corp" />
         </Field>
         <Field label="Email">
-          <Input
-            id="qr-vcard-email"
-            value={data.vcardEmail}
-            onChange={(v) => setField("vcardEmail", v)}
-            placeholder="john@example.com"
-            type="email"
-          />
+          <Input id="qr-v-email" value={data.vcardEmail} onChange={(v) => setField("vcardEmail", v)} placeholder="john@example.com" type="email" />
         </Field>
-        <Field label="Phone">
-          <Input
-            id="qr-vcard-phone"
-            value={data.vcardPhone}
-            onChange={(v) => setField("vcardPhone", v)}
-            placeholder="+1 234 567 8900"
-            type="tel"
-          />
+      </div>
+    );
+  }
+
+  if (data.type === "WhatsApp") {
+    return (
+      <div className="form-fields">
+        <Field label="Phone Number">
+          <Input id="qr-wa-num" value={data.whatsappNumber} onChange={(v) => setField("whatsappNumber", v)} placeholder="+1234567890" type="tel" />
         </Field>
-        <Field label="Website">
-          <Input
-            id="qr-vcard-url"
-            value={data.vcardUrl}
-            onChange={(v) => setField("vcardUrl", v)}
-            placeholder="https://johndoe.com"
-            type="url"
-          />
+        <Field label="Pre-filled Message">
+          <Input id="qr-wa-msg" value={data.whatsappMessage} onChange={(v) => setField("whatsappMessage", v)} placeholder="I'm interested..." />
+        </Field>
+      </div>
+    );
+  }
+
+  if (data.type === "Social") {
+    return (
+      <div className="form-fields">
+        <Field label="Platform">
+          <div className="segmented-control">
+            {[
+              { value: "Instagram", label: "Instagram" },
+              { value: "Twitter", label: "X / Twitter" },
+              { value: "LinkedIn", label: "LinkedIn" },
+              { value: "Facebook", label: "Facebook" },
+            ].map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                className={`seg-btn${data.socialPlatform === opt.value ? " active" : ""}`}
+                onClick={() => setField("socialPlatform", opt.value)}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </Field>
+        <Field label="Username">
+          <Input id="qr-soc-hand" value={data.socialHandle} onChange={(v) => setField("socialHandle", v)} placeholder="@username" />
+        </Field>
+      </div>
+    );
+  }
+
+  if (data.type === "Payment") {
+    return (
+      <div className="form-fields">
+        <Field label="PayPal Username">
+          <Input id="qr-pay-user" value={data.paymentUser} onChange={(v) => setField("paymentUser", v)} placeholder="username" />
+        </Field>
+        <Field label="Amount">
+          <Input id="qr-pay-amt" value={data.paymentAmount} onChange={(v) => setField("paymentAmount", v)} placeholder="10.00" />
+        </Field>
+      </div>
+    );
+  }
+
+  if (data.type === "Location") {
+    return (
+      <div className="form-fields">
+        <Field label="Latitude">
+          <Input id="qr-lat" value={data.locationLat} onChange={(v) => setField("locationLat", v)} placeholder="40.7128" />
+        </Field>
+        <Field label="Longitude">
+          <Input id="qr-lng" value={data.locationLng} onChange={(v) => setField("locationLng", v)} placeholder="-74.0060" />
+        </Field>
+      </div>
+    );
+  }
+
+  if (data.type === "AppStore" || data.type === "Meeting") {
+    return (
+      <div className="form-fields">
+        <Field label="URL">
+          <Input id="qr-gen-url" value={data.url} onChange={(v) => setField("url", v)} placeholder="https://..." type="url" />
         </Field>
       </div>
     );

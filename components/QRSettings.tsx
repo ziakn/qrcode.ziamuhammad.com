@@ -12,7 +12,7 @@ const ERROR_LEVELS: { value: ErrorCorrection; label: string; desc: string }[] = 
 ];
 
 export function QRSettings() {
-  const { settings, setSetting } = useQRStore();
+  const { data, setField, settings, setSetting } = useQRStore();
   const [open, setOpen] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ export function QRSettings() {
         aria-expanded={open}
       >
         <Sliders size={14} />
-        Customize
+        Advanced options
         <span className={`chevron${open ? " open" : ""}`}>▾</span>
       </button>
 
@@ -91,6 +91,47 @@ export function QRSettings() {
                 />
                 <span className="color-hex">{settings.bgColor}</span>
               </div>
+            </div>
+          </div>
+
+          {/* Dots Type */}
+          <div className="setting-row">
+            <span className="field-label">Dots Style</span>
+            <div className="segmented-control">
+              {[
+                { value: "square", label: "Square" },
+                { value: "dots", label: "Dots" },
+                { value: "rounded", label: "Rounded" },
+                { value: "classy", label: "Classy" },
+              ].map((opt) => (
+                <button
+                  key={opt.value}
+                  className={`seg-btn${settings.dotsType === opt.value ? " active" : ""}`}
+                  onClick={() => setSetting("dotsType", opt.value as any)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Corners Type */}
+          <div className="setting-row">
+            <span className="field-label">Corner Style</span>
+            <div className="segmented-control">
+              {[
+                { value: "square", label: "Square" },
+                { value: "dot", label: "Dot" },
+                { value: "extra-rounded", label: "Round" },
+              ].map((opt) => (
+                <button
+                  key={opt.value}
+                  className={`seg-btn${settings.cornersSquareType === opt.value ? " active" : ""}`}
+                  onClick={() => setSetting("cornersSquareType", opt.value as any)}
+                >
+                  {opt.label}
+                </button>
+              ))}
             </div>
           </div>
 

@@ -15,8 +15,10 @@ export function Header() {
         </div>
         <nav className="header-nav">
           <a href="/" className="nav-link">Generator</a>
+          <a href="/templates" className="nav-link">Templates</a>
           <a href="/qr-code-types" className="nav-link">Types</a>
-          <a href="/how-to-create-a-qr-code" className="nav-link">Guide</a>
+          <a href="/how-to-scan-qr-code" className="nav-link">How to Scan</a>
+          <a href="/blog" className="nav-link">Blog</a>
           
           <div className="nav-divider"></div>
 

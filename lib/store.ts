@@ -1,33 +1,45 @@
 import { create } from "zustand";
 
-export type QRType = "url" | "text" | "wifi" | "email" | "phone" | "vcard";
+export type QRType = 
+  | "URL" | "Text" | "WiFi" | "Email" | "Phone" | "vCard" 
+  | "WhatsApp" | "Social" | "Payment" | "AppStore" | "Location" | "Meeting";
 export type ErrorCorrection = "L" | "M" | "Q" | "H";
 export type WifiSecurity = "WPA" | "WEP" | "nopass";
 
 export interface QRData {
   type: QRType;
-  // URL / Text
-  url: string;
-  text: string;
+  url?: string;
+  text?: string;
   // WiFi
-  ssid: string;
-  password: string;
+  ssid?: string;
+  password?: string;
   security: WifiSecurity;
   hidden: boolean;
   // Email
   emailTo: string;
   emailSubject: string;
   emailBody: string;
-  // Phone
-  phone: string;
-  // vCard
-  firstName: string;
-  lastName: string;
-  org: string;
-  jobTitle: string;
-  vcardEmail: string;
-  vcardPhone: string;
-  vcardUrl: string;
+  // Contact
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  org?: string;
+  jobTitle?: string;
+  vcardEmail?: string;
+  vcardPhone?: string;
+  vcardUrl?: string;
+  // Specialized
+  whatsappNumber?: string;
+  whatsappMessage?: string;
+  socialHandle?: string;
+  socialPlatform?: string;
+  paymentUser?: string;
+  paymentAmount?: string;
+  paymentNote?: string;
+  locationLat?: string;
+  locationLng?: string;
+  meetingUrl?: string;
   // Logo
   logo?: string; // Data URL
 }
@@ -46,6 +58,9 @@ interface QRSettings {
   bgColor: string;
   errorCorrection: ErrorCorrection;
   margin: number;
+  dotsType: "square" | "dots" | "rounded" | "extra-rounded" | "classy" | "classy-rounded";
+  cornersSquareType: "square" | "dot" | "extra-rounded";
+  cornersDotType: "square" | "dot";
 }
 
 interface QRStore {
@@ -68,7 +83,7 @@ interface QRStore {
 }
 
 const DEFAULT_DATA: QRData = {
-  type: "url",
+  type: "URL",
   url: "",
   text: "",
   ssid: "",
@@ -78,14 +93,6 @@ const DEFAULT_DATA: QRData = {
   emailTo: "",
   emailSubject: "",
   emailBody: "",
-  phone: "",
-  firstName: "",
-  lastName: "",
-  org: "",
-  jobTitle: "",
-  vcardEmail: "",
-  vcardPhone: "",
-  vcardUrl: "",
 };
 
 const DEFAULT_SETTINGS: QRSettings = {
@@ -94,21 +101,24 @@ const DEFAULT_SETTINGS: QRSettings = {
   bgColor: "#FFFFFF",
   errorCorrection: "M",
   margin: 2,
+  dotsType: "square",
+  cornersSquareType: "square",
+  cornersDotType: "square",
 };
 
 function buildContent(data: QRData): string {
   switch (data.type) {
-    case "url":
+    case "URL":
       return data.url || "https://example.com";
-    case "text":
+    case "Text":
       return data.text || "Hello, World!";
-    case "wifi":
+    case "WiFi":
       return `WIFI:T:${data.security};S:${data.ssid};P:${data.password};H:${data.hidden ? "true" : "false"};;`;
-    case "email":
+    case "Email":
       return `mailto:${data.emailTo}?subject=${encodeURIComponent(data.emailSubject)}&body=${encodeURIComponent(data.emailBody)}`;
-    case "phone":
+    case "Phone":
       return `tel:${data.phone}`;
-    case "vcard":
+    case "vCard":
       return [
         "BEGIN:VCARD",
         "VERSION:3.0",
@@ -123,8 +133,26 @@ function buildContent(data: QRData): string {
       ]
         .filter(Boolean)
         .join("\n");
+    case "WhatsApp":
+      const waNum = data.whatsappNumber?.replace(/\D/g, "");
+      const waMsg = encodeURIComponent(data.whatsappMessage || "");
+      return `https://wa.me/${waNum}${waMsg ? `?text=${waMsg}` : ""}`;
+    case "Social":
+      const handle = data.socialHandle?.replace("@", "");
+      if (data.socialPlatform === "Instagram") return `https://instagram.com/${handle}`;
+      if (data.socialPlatform === "Twitter") return `https://twitter.com/${handle}`;
+      if (data.socialPlatform === "LinkedIn") return `https://linkedin.com/in/${handle}`;
+      return data.url || "";
+    case "Payment":
+      return `https://paypal.me/${data.paymentUser}/${data.paymentAmount || ""}`;
+    case "Location":
+      return `https://www.google.com/maps/search/?api=1&query=${data.locationLat},${data.locationLng}`;
+    case "Meeting":
+      return data.meetingUrl || "";
+    case "AppStore":
+      return data.url || "";
     default:
-      return "";
+      return data.url || "";
   }
 }
 

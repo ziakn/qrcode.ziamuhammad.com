@@ -88,20 +88,15 @@ export function QRPreview() {
 
       {qrDataUrl && (
         <div className="preview-actions">
-          <button id="btn-copy" onClick={copyContent} className="btn-secondary">
-            {copied ? <Check size={14} /> : <Copy size={14} />}
-            {copied ? "Copied!" : "Copy content"}
+          <button id="btn-download-png" onClick={downloadPNG} className="btn-primary">
+            Download PNG
           </button>
-          <div className="download-group">
-            <button id="btn-download-png" onClick={downloadPNG} className="btn-primary">
-              <Download size={14} />
-              PNG
-            </button>
-            <button id="btn-download-svg" onClick={downloadSVG} className="btn-outline">
-              <Download size={14} />
-              SVG
-            </button>
-          </div>
+          <button id="btn-download-svg" onClick={downloadSVG} className="btn-outline">
+            Download SVG
+          </button>
+          <button id="btn-copy" onClick={copyContent} className="btn-secondary">
+            {copied ? "Copied content" : "Copy content"}
+          </button>
         </div>
       )}
     </div>

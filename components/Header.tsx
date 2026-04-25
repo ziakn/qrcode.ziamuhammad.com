@@ -14,21 +14,17 @@ export function Header() {
           <span className="logo-text">QR Forge</span>
         </div>
         <nav className="header-nav">
-          <button
-            id="btn-reset"
-            onClick={reset}
-            className="nav-btn"
-            title="Reset everything"
-          >
-            <RotateCcw size={15} />
-            Reset
-          </button>
+          <a href="/" className="nav-link">Generator</a>
+          <a href="/qr-code-types" className="nav-link">Types</a>
+          <a href="/how-to-create-a-qr-code" className="nav-link">Guide</a>
+          
+          <div className="nav-divider"></div>
+
           <button
             id="btn-theme-toggle"
             onClick={toggleDark}
             className="nav-btn icon-only"
             aria-label="Toggle dark mode"
-            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>

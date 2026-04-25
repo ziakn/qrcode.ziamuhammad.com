@@ -2,15 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "QR Forge — Fast, Free QR Code Generator",
+  title: "QR Forge — Simple, High-Quality QR Codes",
   description:
-    "Generate high-quality QR codes instantly. Supports URLs, WiFi, vCard, email, and more. Download as PNG or SVG. No signup required.",
-  keywords: ["QR code generator", "free QR code", "WiFi QR", "vCard QR", "URL QR code"],
-  openGraph: {
-    title: "QR Forge — Fast, Free QR Code Generator",
-    description: "Generate high-quality QR codes instantly. No signup required.",
-    type: "website",
-  },
+    "Generate precise, high-quality QR codes instantly. Editorial design meets technical utility. No sign-up, no tracking.",
+  keywords: ["QR code generator", "minimalist QR", "high quality QR", "WiFi QR"],
 };
 
 export default function RootLayout({
@@ -20,6 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+      </head>
       <body>{children}</body>
     </html>
   );

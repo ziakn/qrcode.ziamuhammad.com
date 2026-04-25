@@ -8,6 +8,7 @@ const slug = "/privacy-policy";
 export const metadata: Metadata = {
   title: "Privacy Policy — QR Forge",
   description: "Learn how we protect your privacy. Our policy on data collection, QR generation, and user security.",
+  keywords: ["privacy policy", "data protection", "qr code privacy", "user security", "legal"],
   alternates: { canonical: slug },
 };
 

@@ -8,6 +8,7 @@ const slug = "/how-to-scan-qr-code";
 export const metadata: Metadata = {
   title: "How to Scan a QR Code — Definitive Guide for iOS & Android",
   description: "Learn how to scan QR codes using your smartphone. Detailed instructions for iPhone and Android users using built-in camera technology.",
+  keywords: ["how to scan qr code", "qr code scanner", "scan qr code iphone", "scan qr code android", "google lens qr code"],
   alternates: { canonical: slug },
 };
 

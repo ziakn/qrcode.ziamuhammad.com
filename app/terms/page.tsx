@@ -8,6 +8,7 @@ const slug = "/terms";
 export const metadata: Metadata = {
   title: "Terms of Service — QR Forge",
   description: "Read our terms of service. Guidelines for using our QR code generation tool and legal agreements.",
+  keywords: ["terms of service", "tos", "user agreement", "usage guidelines", "legal"],
   alternates: { canonical: slug },
 };
 

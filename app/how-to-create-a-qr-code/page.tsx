@@ -8,6 +8,7 @@ const slug = "/how-to-create-a-qr-code";
 export const metadata: Metadata = {
   title: "How to Create a QR Code — Step-by-Step Guide for 2024",
   description: "Learn how to make a high-quality QR code for free. This guide covers choosing a type, customizing the design, and downloading for print or web.",
+  keywords: ["how to create qr code", "make qr code free", "qr code creation guide", "custom qr design", "qr code tutorial"],
   alternates: { canonical: slug },
 };
 

@@ -26,8 +26,10 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "QR Code Templates — 20 Ready-to-Use Designs",
-  description: "Browse 20+ quick-start templates for WiFi, Business Cards, Social Media, Payments, and more.",
+  title: "QR Code Templates — Professional Designs for Every Use Case",
+  description: "Browse 20+ custom QR code templates. Ready-to-use designs for restaurants, real estate, social media, and business cards.",
+  keywords: ["qr code templates", "qr code design", "restaurant qr code", "real estate qr code", "business card qr code", "custom qr styles"],
+  alternates: { canonical: "/templates" },
 };
 
 const TEMPLATES = [

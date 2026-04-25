@@ -8,6 +8,7 @@ const slug = "/qr-code-size-guide";
 export const metadata: Metadata = {
   title: "QR Code Size Guide — Professional Dimensions for Print & Digital",
   description: "Learn the technical standards for QR code sizing. A complete guide on minimum dimensions, scanning distance, and print resolutions.",
+  keywords: ["qr code size guide", "minimum qr code size", "qr code print resolution", "qr code dimensions", "scannable qr size"],
   alternates: { canonical: slug },
 };
 

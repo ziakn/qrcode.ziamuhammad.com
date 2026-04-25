@@ -12,6 +12,7 @@ const slug = "/qr-code-types";
 export const metadata: Metadata = {
   title: "QR Code Types — Explore 20+ Supported Formats",
   description: "Explore all QR code types: URL, WiFi, vCard, Social Media, and more. Discover the best format for your needs.",
+  keywords: ["qr code types", "qr code formats", "wifi qr code", "vcard qr code", "whatsapp qr code", "dynamic qr codes"],
   alternates: { canonical: slug },
 };
 

@@ -8,6 +8,7 @@ import { CheckCircle, Zap, Shield, Globe } from "lucide-react";
 export const metadata: Metadata = {
   title: "Free QR Code Generator — Create High-Quality Custom QR Codes",
   description: "Generate professional, custom QR codes for free with QR Forge. Support for WiFi, vCard, Social Media, and more. No accounts required, high-resolution downloads.",
+  keywords: ["free qr code generator", "custom qr code", "high quality qr code", "wifi qr code", "vcard qr code", "social media qr code", "svg qr code"],
   alternates: { canonical: "https://qrcode.ziamuhammad.com" },
   openGraph: {
     title: "Free QR Code Generator — QR Forge",

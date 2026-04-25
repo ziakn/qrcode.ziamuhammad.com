@@ -4,36 +4,30 @@ import { useEffect, useRef } from "react";
 import { useQRStore } from "@/lib/store";
 import QRCodeStyling from "qr-code-styling";
 
+const BRAND_COLORS: Record<string, string> = {
+  Instagram: "#E4405F",
+  Twitter: "#1DA1F2",
+  LinkedIn: "#0A66C2",
+  Facebook: "#1877F2",
+};
+
 export function useQRGenerator() {
   const { data, settings, setQRDataUrl, setIsGenerating, buildQRContent } = useQRStore();
   const qrCodeInstance = useRef<QRCodeStyling | null>(null);
 
   useEffect(() => {
-    // Initialize the instance only once
     if (typeof window !== "undefined" && !qrCodeInstance.current) {
       qrCodeInstance.current = new QRCodeStyling({
         width: settings.size,
         height: settings.size,
         type: "canvas",
         data: "",
-        margin: settings.margin * 10, // Approximate conversion
+        margin: settings.margin * 4,
         qrOptions: {
           errorCorrectionLevel: settings.errorCorrection,
         },
-        dotsOptions: {
-          color: settings.fgColor,
-          type: settings.dotsType,
-        },
         backgroundOptions: {
           color: settings.bgColor,
-        },
-        cornersSquareOptions: {
-          type: settings.cornersSquareType,
-          color: settings.fgColor,
-        },
-        cornersDotOptions: {
-          type: settings.cornersDotType,
-          color: settings.fgColor,
         },
       });
     }
@@ -48,26 +42,37 @@ export function useQRGenerator() {
 
     const timer = setTimeout(async () => {
       if (qrCodeInstance.current) {
-        // Update data and styling
+        // Handle Brand Themes
+        let fgColor = settings.fgColor;
+        let dotsType = settings.dotsType;
+        let cornerType = settings.cornersSquareType;
+
+        if (data.type === "Social" && data.socialPlatform) {
+          fgColor = BRAND_COLORS[data.socialPlatform] || fgColor;
+          // Apply brand-specific "vibe"
+          if (data.socialPlatform === "Instagram") dotsType = "dots";
+          if (data.socialPlatform === "LinkedIn") cornerType = "extra-rounded";
+        }
+
         qrCodeInstance.current.update({
           data: content,
           width: settings.size,
           height: settings.size,
           margin: settings.margin * 4,
           dotsOptions: {
-            color: settings.fgColor,
-            type: settings.dotsType,
+            color: fgColor,
+            type: dotsType,
           },
           backgroundOptions: {
             color: settings.bgColor,
           },
           cornersSquareOptions: {
-            type: settings.cornersSquareType,
-            color: settings.fgColor,
+            type: cornerType,
+            color: fgColor,
           },
           cornersDotOptions: {
             type: settings.cornersDotType,
-            color: settings.fgColor,
+            color: fgColor,
           },
           image: data.logo || undefined,
           imageOptions: {
@@ -77,7 +82,6 @@ export function useQRGenerator() {
           }
         });
 
-        // Get Data URL
         const blob = await qrCodeInstance.current.getRawData("png");
         if (blob) {
           const reader = new FileReader();

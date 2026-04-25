@@ -138,13 +138,14 @@ export function QRSettings() {
           {/* Error correction */}
           <div className="setting-row">
             <span className="field-label">Error correction</span>
-            <div className="ec-group">
+            <div className="segmented-control">
               {ERROR_LEVELS.map((ec) => (
                 <button
                   key={ec.value}
                   id={`ec-${ec.value}`}
+                  type="button"
                   onClick={() => setSetting("errorCorrection", ec.value)}
-                  className={`ec-btn${settings.errorCorrection === ec.value ? " active" : ""}`}
+                  className={`seg-btn${settings.errorCorrection === ec.value ? " active" : ""}`}
                   title={ec.desc}
                 >
                   {ec.label}
@@ -168,7 +169,7 @@ export function QRSettings() {
                   </button>
                 </div>
               ) : (
-                <label className="logo-upload-btn">
+                <label className="logo-upload-btn btn-secondary">
                   <Upload size={14} />
                   <span>Upload Logo</span>
                   <input 

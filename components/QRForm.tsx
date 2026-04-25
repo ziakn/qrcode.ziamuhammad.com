@@ -255,9 +255,9 @@ export function QRForm() {
 
   if (data.type === "Social") {
     return (
-      <div className="form-fields">
+      <div className="form-fields" data-platform={data.socialPlatform}>
         <Field label="Platform">
-          <div className="segmented-control">
+          <div className="segmented-control brand-selector">
             {[
               { value: "Instagram", label: "Instagram" },
               { value: "Twitter", label: "X / Twitter" },

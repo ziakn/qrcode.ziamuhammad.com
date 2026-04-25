@@ -142,13 +142,14 @@ function buildContent(data: QRData): string {
       if (data.socialPlatform === "Instagram") return `https://instagram.com/${handle}`;
       if (data.socialPlatform === "Twitter") return `https://twitter.com/${handle}`;
       if (data.socialPlatform === "LinkedIn") return `https://linkedin.com/in/${handle}`;
+      if (data.socialPlatform === "Facebook") return `https://facebook.com/${handle}`;
       return data.url || "";
     case "Payment":
       return `https://paypal.me/${data.paymentUser}/${data.paymentAmount || ""}`;
     case "Location":
       return `https://www.google.com/maps/search/?api=1&query=${data.locationLat},${data.locationLng}`;
     case "Meeting":
-      return data.meetingUrl || "";
+      return data.url || "";
     case "AppStore":
       return data.url || "";
     default:

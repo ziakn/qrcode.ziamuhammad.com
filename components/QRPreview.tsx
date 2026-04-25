@@ -54,10 +54,7 @@ export function QRPreview() {
     <div className="preview-card">
       <div className="qr-canvas-area">
         {isGenerating ? (
-          <div className="qr-skeleton">
-            <Loader2 size={28} className="spin" />
-            <span>Generating…</span>
-          </div>
+          <div className="qr-skeleton shimmer" />
         ) : qrDataUrl ? (
           <div className="qr-fade-in">
             {/* eslint-disable-next-line @next/next/no-img-element */}

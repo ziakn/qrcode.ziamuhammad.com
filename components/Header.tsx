@@ -1,35 +1,23 @@
 "use client";
 
-import { Moon, Sun, QrCode, RotateCcw } from "lucide-react";
-import { useQRStore } from "@/lib/store";
+import Link from "next/link";
+import { QrCode } from "lucide-react";
 
 export function Header() {
-  const { isDark, toggleDark, reset } = useQRStore();
-
   return (
     <header className="site-header">
       <div className="header-inner">
-        <div className="logo">
-          <QrCode size={20} />
+        <Link href="/" className="logo">
+          <QrCode size={24} className="logo-icon" />
           <span className="logo-text">QR Forge</span>
-        </div>
+        </Link>
+        
         <nav className="header-nav">
-          <a href="/" className="nav-link">Generator</a>
-          <a href="/templates" className="nav-link">Templates</a>
-          <a href="/qr-code-types" className="nav-link">Types</a>
-          <a href="/how-to-scan-qr-code" className="nav-link">How to Scan</a>
-          <a href="/blog" className="nav-link">Blog</a>
-          
-          <div className="nav-divider"></div>
-
-          <button
-            id="btn-theme-toggle"
-            onClick={toggleDark}
-            className="nav-btn icon-only"
-            aria-label="Toggle dark mode"
-          >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <Link href="/" className="nav-link">Home</Link>
+          <Link href="/templates" className="nav-link">Templates</Link>
+          <Link href="/qr-code-types" className="nav-link">Types</Link>
+          <Link href="/how-to-scan-qr-code" className="nav-link">How to Scan</Link>
+          <Link href="/qr-code-size-guide" className="nav-link">Size Guide</Link>
         </nav>
       </div>
     </header>

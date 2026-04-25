@@ -11,7 +11,7 @@ interface LandingPageProps {
 }
 
 export function LandingPageTemplate({ title, subtitle, content, schema, slug, relatedLinks }: LandingPageProps) {
-  const canonicalUrl = `https://qrforge.com${slug}`;
+  const canonicalUrl = `https://qrcode.ziamuhammad.com${slug}`;
 
   return (
     <div className="landing-page">

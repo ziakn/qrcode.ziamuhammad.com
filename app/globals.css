@@ -953,3 +953,39 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
 }
+/* ─── Home Page Editorial ────────────────────────────────── */
+.home-editorial {
+  margin-top: var(--64);
+  padding-top: var(--64);
+  border-top: 1px solid var(--border);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--32);
+  margin-bottom: var(--64);
+}
+
+.feature-item {
+  text-align: center;
+}
+
+.feature-icon {
+  color: var(--accent);
+  margin-bottom: var(--16);
+  margin-inline: auto;
+}
+
+.feature-item h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: var(--8);
+  color: var(--text-primary);
+}
+
+.feature-item p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

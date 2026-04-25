@@ -1,51 +1,49 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Download, Copy, Check, Loader2 } from "lucide-react";
 import { useQRStore } from "@/lib/store";
-import QRCode from "qrcode";
+import { useQRGenerator } from "@/hooks/useQRGenerator";
+import { useRef, useState, useEffect } from "react";
 
 export function QRPreview() {
-  const { qrDataUrl, isGenerating, buildQRContent, settings, addToHistory } = useQRStore();
+  const { qrDataUrl, isGenerating, settings, buildQRContent } = useQRStore();
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  useQRGenerator();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const downloadPNG = () => {
     if (!qrDataUrl) return;
-    addToHistory(qrDataUrl);
-    const a = document.createElement("a");
-    a.href = qrDataUrl;
-    a.download = "qr-code.png";
-    a.click();
+    const link = document.createElement("a");
+    link.download = "qrcode.png";
+    link.href = qrDataUrl;
+    link.click();
   };
 
   const downloadSVG = async () => {
+    // We recreate it for SVG export specifically
+    if (typeof window === "undefined") return;
+    const QRCodeStyling = (await import("qr-code-styling")).default;
     const content = buildQRContent();
-    if (!content) return;
-    try {
-      const svgStr = await QRCode.toString(content, {
-        type: "svg",
-        width: settings.size,
-        margin: settings.margin,
-        color: { dark: settings.fgColor, light: settings.bgColor },
-        errorCorrectionLevel: settings.errorCorrection,
-      });
-      const blob = new Blob([svgStr], { type: "image/svg+xml" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "qr-code.svg";
-      a.click();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("SVG export error:", err);
-    }
+    const qr = new QRCodeStyling({
+      width: 1000,
+      height: 1000,
+      data: content,
+      dotsOptions: { color: settings.fgColor, type: settings.dotsType },
+      backgroundOptions: { color: settings.bgColor },
+      cornersSquareOptions: { type: settings.cornersSquareType, color: settings.fgColor },
+      cornersDotOptions: { type: settings.cornersDotType, color: settings.fgColor },
+    });
+    qr.download({ name: "qrcode", extension: "svg" });
   };
 
-  const copyContent = async () => {
+  const copyContent = () => {
     const content = buildQRContent();
-    if (!content) return;
-    await navigator.clipboard.writeText(content);
+    navigator.clipboard.writeText(content);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -70,7 +68,7 @@ export function QRPreview() {
         ) : (
           <div className="qr-placeholder">
             <div className="qr-placeholder-grid">
-              {Array.from({ length: 49 }).map((_, i) => (
+              {mounted && Array.from({ length: 49 }).map((_, i) => (
                 <div
                   key={i}
                   className="qr-dot"

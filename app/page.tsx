@@ -3,7 +3,11 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { QRStudio } from "@/components/QRStudio";
 import Link from "next/link";
-import { CheckCircle, Zap, Shield, Globe } from "lucide-react";
+import { 
+  CheckCircle, Zap, Shield, Globe, 
+  MousePointer2, Settings2, Download, Search,
+  HelpCircle, ArrowRight
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Free QR Code Generator — Create High-Quality Custom QR Codes",
@@ -45,49 +49,118 @@ export default function Home() {
       <main className="main">
         <section className="hero">
           <h1 className="hero-title">Free QR Code Generator</h1>
-          <p className="hero-sub">Create professional, high-fidelity QR codes for your business or personal use in seconds.</p>
+          <p className="hero-sub">The most intuitive way to create high-fidelity QR codes for your business or personal projects.</p>
         </section>
 
         <QRStudio />
 
-        {/* SEO Content Section: Rule 5 (No thin pages) */}
-        <section className="home-editorial landing-container">
-          <div className="editorial-content">
+        <div className="home-content-wrap">
+          {/* Features Section */}
+          <section className="home-section">
             <div className="features-grid">
               <div className="feature-item">
-                <Zap size={24} className="feature-icon" />
+                <div className="feature-icon-wrap"><Zap size={24} /></div>
                 <h3>Fast & Real-Time</h3>
                 <p>See your changes instantly as you type. No waiting, no refreshing.</p>
               </div>
               <div className="feature-item">
-                <Shield size={24} className="feature-icon" />
+                <div className="feature-icon-wrap"><Shield size={24} /></div>
                 <h3>Privacy First</h3>
                 <p>We don't track your scans or store your data. Your privacy is our priority.</p>
               </div>
               <div className="feature-item">
-                <Globe size={24} className="feature-icon" />
+                <div className="feature-icon-wrap"><Globe size={24} /></div>
                 <h3>High Resolution</h3>
                 <p>Download in PNG or vector SVG formats for perfect print quality.</p>
               </div>
               <div className="feature-item">
-                <CheckCircle size={24} className="feature-icon" />
+                <div className="feature-icon-wrap"><CheckCircle size={24} /></div>
                 <h3>10+ QR Types</h3>
                 <p>From WiFi and vCards to Social Media and Payment links.</p>
               </div>
             </div>
+          </section>
 
-            <article className="article-section">
+          {/* How it Works Section */}
+          <section className="home-section editorial-centered">
+            <div className="section-header">
+              <span className="section-tag">Process</span>
+              <h2>How to Create Your QR Code</h2>
+              <p>Four simple steps to a professional result.</p>
+            </div>
+            
+            <div className="steps-grid">
+              <div className="step-card">
+                <div className="step-num">01</div>
+                <MousePointer2 size={32} className="step-icon" />
+                <h4>Select Type</h4>
+                <p>Pick from URL, WiFi, vCard, or social media platforms.</p>
+              </div>
+              <div className="step-card">
+                <div className="step-num">02</div>
+                <Search size={32} className="step-icon" />
+                <h4>Enter Data</h4>
+                <p>Fill in the required fields with your specific information.</p>
+              </div>
+              <div className="step-card">
+                <div className="step-num">03</div>
+                <Settings2 size={32} className="step-icon" />
+                <h4>Customize</h4>
+                <p>Adjust colors, patterns, and add your brand logo.</p>
+              </div>
+              <div className="step-card">
+                <div className="step-num">04</div>
+                <Download size={32} className="step-icon" />
+                <h4>Download</h4>
+                <p>Export in high-resolution PNG or vector SVG format.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Why Choose Section */}
+          <section className="home-section split-section">
+            <div className="split-content">
               <h2>Why Choose QR Forge?</h2>
               <p>In a world full of complex, account-walled tools, QR Forge stands out by offering a friction-free experience. Our engine is built for precision, allowing you to customize everything from dot patterns to eye styles while ensuring your codes remain 100% scannable.</p>
-              <p>Whether you're looking to <Link href="/how-to-create-a-qr-code">create a QR code</Link> for your restaurant menu or share your <Link href="/qr-code-for-wifi">WiFi password</Link> securely, we provide the technical depth and design flexibility you need.</p>
-            </article>
-
-            <article className="article-section">
+              <div className="split-benefits">
+                <div className="benefit-line"><CheckCircle size={16} /> <span>No account or sign-up required</span></div>
+                <div className="benefit-line"><CheckCircle size={16} /> <span>Unlimited generations and scans</span></div>
+                <div className="benefit-line"><CheckCircle size={16} /> <span>Professional vector SVG support</span></div>
+              </div>
+            </div>
+            <div className="split-content alt-bg">
               <h2>Professional Standards</h2>
-              <p>We follow strict <Link href="/qr-code-size-guide">sizing guidelines</Link> to ensure your codes work on every device. By supporting high error correction levels, we allow you to add logos without compromising the integrity of the data.</p>
-            </article>
-          </div>
-        </section>
+              <p>We follow <Link href="/qr-code-size-guide">strict sizing guidelines</Link> to ensure your codes work on every device. By supporting high error correction levels, we allow you to add logos without compromising the integrity of the data.</p>
+              <Link href="/qr-code-types" className="btn-text">Explore QR Types <ArrowRight size={16} /></Link>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="home-section editorial-centered">
+            <div className="section-header">
+              <HelpCircle size={32} className="section-icon-top" />
+              <h2>Frequently Asked Questions</h2>
+            </div>
+            <div className="faq-grid">
+              <div className="faq-item">
+                <h4>Are these QR codes permanent?</h4>
+                <p>Yes. Our codes are "static," meaning the data is encoded directly into the image. They will work as long as the destination URL or data is active.</p>
+              </div>
+              <div className="faq-item">
+                <h4>Do I need an account?</h4>
+                <p>No. We believe in a friction-free experience. You can generate as many codes as you want without ever giving us your email.</p>
+              </div>
+              <div className="faq-item">
+                <h4>Can I add my own logo?</h4>
+                <p>Absolutely. Use the Advanced options to upload a logo. We recommend using a High error correction level when adding images.</p>
+              </div>
+              <div className="faq-item">
+                <h4>Is it really free?</h4>
+                <p>Yes. QR Forge is a free utility. We don't charge for high-resolution downloads or advanced customization features.</p>
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
       <Footer />
     </>

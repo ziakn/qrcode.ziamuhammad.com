@@ -4,13 +4,15 @@ import { TypeSelector } from "@/components/TypeSelector";
 import { QRForm } from "@/components/QRForm";
 import { QRPreview } from "@/components/QRPreview";
 import { QRSettings } from "@/components/QRSettings";
+import { useQRStore } from "@/lib/store";
 import { useQRGenerator } from "@/hooks/useQRGenerator";
 
 export function QRStudio() {
+  const { settings } = useQRStore();
   useQRGenerator();
 
   return (
-    <div className="workspace">
+    <div className="workspace" data-platform={settings.type}>
       {/* Left: Input panel */}
       <section className="input-panel" aria-label="QR code inputs">
         <TypeSelector />

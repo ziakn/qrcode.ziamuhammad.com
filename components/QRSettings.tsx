@@ -1,191 +1,155 @@
 "use client";
 
-import { useQRStore, ErrorCorrection } from "@/lib/store";
-import { Sliders, Upload, X } from "lucide-react";
-import { useState, useRef } from "react";
-
-const ERROR_LEVELS: { value: ErrorCorrection; label: string; desc: string }[] = [
-  { value: "L", label: "L", desc: "Low (7%)" },
-  { value: "M", label: "M", desc: "Medium (15%)" },
-  { value: "Q", label: "Q", desc: "High (25%)" },
-  { value: "H", label: "H", desc: "Max (30%)" },
-];
+import { useQRStore } from "@/lib/store";
+import { ChevronDown, Palette, Layout, Settings2, Image as ImageIcon, X } from "lucide-react";
+import { useState } from "react";
 
 export function QRSettings() {
-  const { data, setField, settings, setSetting } = useQRStore();
-  const [open, setOpen] = useState(false);
+  const { settings, setSettings } = useQRStore();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="settings-panel">
+    <div className="settings-panel-full">
       <button
-        id="btn-settings-toggle"
-        className="settings-toggle"
-        onClick={() => setOpen((p) => !p)}
-        aria-expanded={open}
+        onClick={() => setIsOpen(!isOpen)}
+        className="settings-toggle-bar"
+        type="button"
+        aria-expanded={isOpen}
       >
-        <Sliders size={14} />
-        Advanced options
-        <span className={`chevron${open ? " open" : ""}`}>▾</span>
+        <div className="toggle-label-wrap">
+          <Settings2 size={18} />
+          <span>Advanced Design Options</span>
+        </div>
+        <div className={`chevron-wrap ${isOpen ? "is-open" : ""}`}>
+          <ChevronDown size={18} />
+        </div>
       </button>
 
-      {open && (
-        <div className="settings-body">
-          {/* Size */}
-          <div className="setting-row">
-            <label className="field-label" htmlFor="setting-size">
-              Size <span className="setting-value">{settings.size}px</span>
-            </label>
-            <input
-              id="setting-size"
-              type="range"
-              min={128}
-              max={600}
-              step={8}
-              value={settings.size}
-              onChange={(e) => setSetting("size", Number(e.target.value))}
-              className="range-input"
-            />
-          </div>
-
-          {/* Margin */}
-          <div className="setting-row">
-            <label className="field-label" htmlFor="setting-margin">
-              Quiet zone <span className="setting-value">{settings.margin}</span>
-            </label>
-            <input
-              id="setting-margin"
-              type="range"
-              min={0}
-              max={6}
-              step={1}
-              value={settings.margin}
-              onChange={(e) => setSetting("margin", Number(e.target.value))}
-              className="range-input"
-            />
-          </div>
-
-          {/* Colors */}
-          <div className="color-row">
-            <div className="color-field">
-              <label className="field-label" htmlFor="setting-fg">Foreground</label>
-              <div className="color-input-wrap">
-                <input
-                  id="setting-fg"
-                  type="color"
-                  value={settings.fgColor}
-                  onChange={(e) => setSetting("fgColor", e.target.value)}
-                  className="color-input"
-                />
-                <span className="color-hex">{settings.fgColor}</span>
-              </div>
+      {isOpen && (
+        <div className="settings-content-area">
+          {/* Section: Colors */}
+          <div className="settings-section">
+            <div className="settings-section-header">
+              <Palette size={14} />
+              <span>Color Palette</span>
             </div>
-            <div className="color-field">
-              <label className="field-label" htmlFor="setting-bg">Background</label>
-              <div className="color-input-wrap">
-                <input
-                  id="setting-bg"
-                  type="color"
-                  value={settings.bgColor}
-                  onChange={(e) => setSetting("bgColor", e.target.value)}
-                  className="color-input"
-                />
-                <span className="color-hex">{settings.bgColor}</span>
+            <div className="settings-grid-2col">
+              <div className="field">
+                <label className="field-label">Foreground</label>
+                <div className="color-control">
+                  <input
+                    type="color"
+                    value={settings.fgColor}
+                    onChange={(e) => setSettings({ fgColor: e.target.value })}
+                    className="color-swatch"
+                  />
+                  <input 
+                    type="text" 
+                    value={settings.fgColor} 
+                    onChange={(e) => setSettings({ fgColor: e.target.value })}
+                    className="input mono-font"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="field-label">Background</label>
+                <div className="color-control">
+                  <input
+                    type="color"
+                    value={settings.bgColor}
+                    onChange={(e) => setSettings({ bgColor: e.target.value })}
+                    className="color-swatch"
+                  />
+                  <input 
+                    type="text" 
+                    value={settings.bgColor} 
+                    onChange={(e) => setSettings({ bgColor: e.target.value })}
+                    className="input mono-font"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Dots Type */}
-          <div className="setting-row">
-            <span className="field-label">Dots Style</span>
-            <div className="segmented-control">
-              {[
-                { value: "square", label: "Square" },
-                { value: "dots", label: "Dots" },
-                { value: "rounded", label: "Rounded" },
-                { value: "classy", label: "Classy" },
-              ].map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`seg-btn${settings.dotsType === opt.value ? " active" : ""}`}
-                  onClick={() => setSetting("dotsType", opt.value as any)}
-                >
-                  {opt.label}
-                </button>
-              ))}
+          {/* Section: Patterns */}
+          <div className="settings-section">
+            <div className="settings-section-header">
+              <Layout size={14} />
+              <span>Module & Eye Styles</span>
+            </div>
+            <div className="settings-grid-2col">
+              <div className="field">
+                <label className="field-label">Body Pattern</label>
+                <div className="segmented-control">
+                  {["square", "dots", "rounded"].map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setSettings({ dotsType: t as any })}
+                      className={`seg-btn ${settings.dotsType === t ? "active" : ""}`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="field">
+                <label className="field-label">Eye Shape</label>
+                <div className="segmented-control">
+                  {["square", "extra-rounded", "dot"].map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setSettings({ cornersSquareType: t as any })}
+                      className={`seg-btn ${settings.cornersSquareType === t ? "active" : ""}`}
+                    >
+                      {t.split("-")[0]}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Corners Type */}
-          <div className="setting-row">
-            <span className="field-label">Corner Style</span>
-            <div className="segmented-control">
-              {[
-                { value: "square", label: "Square" },
-                { value: "dot", label: "Dot" },
-                { value: "extra-rounded", label: "Round" },
-              ].map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`seg-btn${settings.cornersSquareType === opt.value ? " active" : ""}`}
-                  onClick={() => setSetting("cornersSquareType", opt.value as any)}
-                >
-                  {opt.label}
-                </button>
-              ))}
+          {/* Section: Branding */}
+          <div className="settings-section">
+            <div className="settings-section-header">
+              <ImageIcon size={14} />
+              <span>Brand Logo Overlay</span>
             </div>
-          </div>
-
-          {/* Error correction */}
-          <div className="setting-row">
-            <span className="field-label">Error correction</span>
-            <div className="segmented-control">
-              {ERROR_LEVELS.map((ec) => (
-                <button
-                  key={ec.value}
-                  id={`ec-${ec.value}`}
-                  type="button"
-                  onClick={() => setSetting("errorCorrection", ec.value)}
-                  className={`seg-btn${settings.errorCorrection === ec.value ? " active" : ""}`}
-                  title={ec.desc}
-                >
-                  {ec.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Logo Upload */}
-          <div className="setting-row">
-            <span className="field-label">Logo / Image</span>
-            <div className="logo-upload-wrap">
-              {data.logo ? (
-                <div className="logo-preview-wrap">
-                  <img src={data.logo} alt="Logo preview" className="logo-thumb" />
+            <div className="branding-upload-area">
+              <input
+                type="file"
+                accept="image/*"
+                id="brand-logo-file"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => setSettings({ logo: ev.target?.result as string });
+                    reader.readAsDataURL(file);
+                  }
+                }}
+              />
+              <label htmlFor="brand-logo-file" className="premium-upload-btn">
+                {settings.logo ? "Replace Current Logo" : "Choose Logo Image"}
+              </label>
+              
+              {settings.logo && (
+                <div className="logo-preview-strip">
+                  <div className="logo-mini-preview">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={settings.logo} alt="Logo preview" />
+                  </div>
                   <button 
-                    onClick={() => setField("logo", undefined)}
-                    className="logo-clear-btn"
+                    type="button" 
+                    onClick={() => setSettings({ logo: undefined })}
+                    className="logo-remove-action"
                   >
-                    <X size={12} />
+                    <X size={14} /> Remove
                   </button>
                 </div>
-              ) : (
-                <label className="logo-upload-btn btn-secondary">
-                  <Upload size={14} />
-                  <span>Upload Logo</span>
-                  <input 
-                    type="file" 
-                    accept="image/*" 
-                    className="hidden" 
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (ev) => setField("logo", ev.target?.result as string);
-                        reader.readAsDataURL(file);
-                      }
-                    }}
-                  />
-                </label>
               )}
             </div>
           </div>

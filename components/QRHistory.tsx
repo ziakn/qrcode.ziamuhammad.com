@@ -5,7 +5,7 @@ import { useQRStore } from "@/lib/store";
 import { Trash2, Clock, ExternalLink } from "lucide-react";
 
 export function QRHistory() {
-  const { history, loadHistory, removeFromHistory, setField, setSetting } = useQRStore();
+  const { history, loadHistory, removeFromHistory, setFields, setSettings } = useQRStore();
 
   useEffect(() => {
     loadHistory();
@@ -30,8 +30,8 @@ export function QRHistory() {
                 <button 
                   onClick={() => {
                     // Restore this QR
-                    Object.entries(item.data).forEach(([key, val]) => setField(key as any, val));
-                    Object.entries(item.settings).forEach(([key, val]) => setSetting(key as any, val));
+                    setFields(item.data);
+                    setSettings(item.settings);
                   }}
                   className="history-action-btn"
                   title="Restore this QR"

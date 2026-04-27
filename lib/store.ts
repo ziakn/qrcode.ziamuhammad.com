@@ -71,7 +71,9 @@ interface QRStore {
   isGenerating: boolean;
   isDark: boolean;
   setField: <K extends keyof QRData>(key: K, value: QRData[K]) => void;
+  setFields: (data: Partial<QRData>) => void;
   setSetting: <K extends keyof QRSettings>(key: K, value: QRSettings[K]) => void;
+  setSettings: (settings: Partial<QRSettings>) => void;
   setQRDataUrl: (url: string | null) => void;
   setIsGenerating: (val: boolean) => void;
   toggleDark: () => void;
@@ -168,8 +170,14 @@ export const useQRStore = create<QRStore>((set, get) => ({
   setField: (key, value) =>
     set((state) => ({ data: { ...state.data, [key]: value } })),
 
+  setFields: (newData) =>
+    set((state) => ({ data: { ...state.data, ...newData } })),
+
   setSetting: (key, value) =>
     set((state) => ({ settings: { ...state.settings, [key]: value } })),
+
+  setSettings: (newSettings) =>
+    set((state) => ({ settings: { ...state.settings, ...newSettings } })),
 
   setQRDataUrl: (url) => set({ qrDataUrl: url }),
   setIsGenerating: (val) => set({ isGenerating: val }),

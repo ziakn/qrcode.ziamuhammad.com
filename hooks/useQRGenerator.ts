@@ -16,6 +16,8 @@ export function useQRGenerator() {
   const qrCodeInstance = useRef<QRCodeStyling | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     if (typeof window !== "undefined" && !qrCodeInstance.current) {
       qrCodeInstance.current = new QRCodeStyling({
         width: settings.size,
@@ -41,59 +43,68 @@ export function useQRGenerator() {
     setIsGenerating(true);
 
     const timer = setTimeout(async () => {
-      if (qrCodeInstance.current) {
-        // Handle Brand Themes
-        let fgColor = settings.fgColor;
-        let dotsType = settings.dotsType;
-        let cornerType = settings.cornersSquareType;
+      if (!qrCodeInstance.current) return;
 
-        if (data.type === "Social" && data.socialPlatform) {
-          fgColor = BRAND_COLORS[data.socialPlatform] || fgColor;
-          // Apply brand-specific "vibe"
-          if (data.socialPlatform === "Instagram") dotsType = "dots";
-          if (data.socialPlatform === "LinkedIn") cornerType = "extra-rounded";
+      // Handle Brand Themes
+      let fgColor = settings.fgColor;
+      let dotsType = settings.dotsType;
+      let cornerType = settings.cornersSquareType;
+
+      if (data.type === "Social" && data.socialPlatform) {
+        fgColor = BRAND_COLORS[data.socialPlatform] || fgColor;
+        // Apply brand-specific "vibe"
+        if (data.socialPlatform === "Instagram") dotsType = "dots";
+        if (data.socialPlatform === "LinkedIn") cornerType = "extra-rounded";
+      }
+
+      qrCodeInstance.current.update({
+        data: content,
+        width: settings.size,
+        height: settings.size,
+        margin: settings.margin * 4,
+        dotsOptions: {
+          color: fgColor,
+          type: dotsType,
+        },
+        backgroundOptions: {
+          color: settings.bgColor,
+        },
+        cornersSquareOptions: {
+          type: cornerType,
+          color: fgColor,
+        },
+        cornersDotOptions: {
+          type: settings.cornersDotType,
+          color: fgColor,
+        },
+        image: data.logo || undefined,
+        imageOptions: {
+          hideBackgroundDots: true,
+          imageSize: 0.3,
+          margin: 0,
         }
+      });
 
-        qrCodeInstance.current.update({
-          data: content,
-          width: settings.size,
-          height: settings.size,
-          margin: settings.margin * 4,
-          dotsOptions: {
-            color: fgColor,
-            type: dotsType,
-          },
-          backgroundOptions: {
-            color: settings.bgColor,
-          },
-          cornersSquareOptions: {
-            type: cornerType,
-            color: fgColor,
-          },
-          cornersDotOptions: {
-            type: settings.cornersDotType,
-            color: fgColor,
-          },
-          image: data.logo || undefined,
-          imageOptions: {
-            hideBackgroundDots: true,
-            imageSize: 0.3,
-            margin: 0,
-          }
-        });
-
+      try {
         const blob = await qrCodeInstance.current.getRawData("png");
-        if (blob) {
+        if (blob && isMounted) {
           const reader = new FileReader();
           reader.onloadend = () => {
-            setQRDataUrl(reader.result as string);
-            setIsGenerating(false);
+            if (isMounted) {
+              setQRDataUrl(reader.result as string);
+              setIsGenerating(false);
+            }
           };
           reader.readAsDataURL(blob);
         }
+      } catch (e) {
+        if (isMounted) setIsGenerating(false);
       }
     }, 350);
 
-    return () => clearTimeout(timer);
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, [data, settings, buildQRContent, setQRDataUrl, setIsGenerating]);
 }

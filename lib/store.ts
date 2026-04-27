@@ -109,23 +109,28 @@ const DEFAULT_SETTINGS: QRSettings = {
 };
 
 function buildContent(data: QRData): string {
+  const safeStr = (str?: string) => str || "";
+
   switch (data.type) {
     case "URL":
-      return data.url || "https://example.com";
+      return safeStr(data.url) || "https://example.com";
     case "Text":
-      return data.text || "Hello, World!";
+      return safeStr(data.text) || "Hello, World!";
     case "WiFi":
-      return `WIFI:T:${data.security};S:${data.ssid};P:${data.password};H:${data.hidden ? "true" : "false"};;`;
+      const escapeWifi = (str?: string) => safeStr(str).replace(/([\\;:,])/g, '\\$1');
+      return `WIFI:T:${data.security};S:${escapeWifi(data.ssid)};P:${escapeWifi(data.password)};H:${data.hidden ? "true" : "false"};;`;
     case "Email":
-      return `mailto:${data.emailTo}?subject=${encodeURIComponent(data.emailSubject)}&body=${encodeURIComponent(data.emailBody)}`;
+      return `mailto:${safeStr(data.emailTo)}?subject=${encodeURIComponent(safeStr(data.emailSubject))}&body=${encodeURIComponent(safeStr(data.emailBody))}`;
     case "Phone":
-      return `tel:${data.phone}`;
+      return `tel:${safeStr(data.phone)}`;
     case "vCard":
+      const fn = safeStr(data.firstName);
+      const ln = safeStr(data.lastName);
       return [
         "BEGIN:VCARD",
         "VERSION:3.0",
-        `FN:${data.firstName} ${data.lastName}`.trim(),
-        `N:${data.lastName};${data.firstName};;;`,
+        `FN:${fn} ${ln}`.trim() || "Contact",
+        `N:${ln};${fn};;;`,
         data.org ? `ORG:${data.org}` : "",
         data.jobTitle ? `TITLE:${data.jobTitle}` : "",
         data.vcardEmail ? `EMAIL:${data.vcardEmail}` : "",
@@ -136,26 +141,26 @@ function buildContent(data: QRData): string {
         .filter(Boolean)
         .join("\n");
     case "WhatsApp":
-      const waNum = data.whatsappNumber?.replace(/\D/g, "");
-      const waMsg = encodeURIComponent(data.whatsappMessage || "");
+      const waNum = safeStr(data.whatsappNumber).replace(/\D/g, "");
+      const waMsg = encodeURIComponent(safeStr(data.whatsappMessage));
       return `https://wa.me/${waNum}${waMsg ? `?text=${waMsg}` : ""}`;
     case "Social":
-      const handle = data.socialHandle?.replace("@", "");
+      const handle = safeStr(data.socialHandle).replace(/^@+/, "");
+      if (!handle) return safeStr(data.url);
       if (data.socialPlatform === "Instagram") return `https://instagram.com/${handle}`;
       if (data.socialPlatform === "Twitter") return `https://twitter.com/${handle}`;
       if (data.socialPlatform === "LinkedIn") return `https://linkedin.com/in/${handle}`;
       if (data.socialPlatform === "Facebook") return `https://facebook.com/${handle}`;
-      return data.url || "";
+      return safeStr(data.url);
     case "Payment":
-      return `https://paypal.me/${data.paymentUser}/${data.paymentAmount || ""}`;
+      const user = safeStr(data.paymentUser);
+      return user ? `https://paypal.me/${user}/${safeStr(data.paymentAmount)}` : "";
     case "Location":
-      return `https://www.google.com/maps/search/?api=1&query=${data.locationLat},${data.locationLng}`;
+      return `https://www.google.com/maps/search/?api=1&query=${safeStr(data.locationLat)},${safeStr(data.locationLng)}`;
     case "Meeting":
-      return data.url || "";
     case "AppStore":
-      return data.url || "";
     default:
-      return data.url || "";
+      return safeStr(data.url);
   }
 }
 

@@ -126,6 +126,10 @@ export function QRSettings() {
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
+                    if (file.size > 2 * 1024 * 1024) {
+                      alert("Image is too large. Please choose an image under 2MB.");
+                      return;
+                    }
                     const reader = new FileReader();
                     reader.onload = (ev) => setSettings({ logo: ev.target?.result as string });
                     reader.readAsDataURL(file);

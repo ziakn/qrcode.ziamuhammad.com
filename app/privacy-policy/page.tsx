@@ -6,10 +6,9 @@ import { Footer } from "@/components/Footer";
 const slug = "/privacy-policy";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — QR Forge",
-  description: "Learn how we protect your privacy. Our policy on data collection, QR generation, and user security.",
-  keywords: ["privacy policy", "data protection", "qr code privacy", "user security", "legal"],
-  alternates: { canonical: slug },
+  title: "Privacy Policy — QR Forge Security & Data Practices",
+  description: "Learn how QR Forge protects your privacy. Read our comprehensive policy on data collection, local QR code generation, and robust user security measures.",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 export default function PrivacyPage() {

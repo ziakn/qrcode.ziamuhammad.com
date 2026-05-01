@@ -2,10 +2,28 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://qrcode.ziamuhammad.com"),
   title: "QR Forge — Simple, High-Quality QR Codes",
   description:
     "Generate precise, high-quality QR codes instantly. Editorial design meets technical utility. No sign-up, no tracking.",
-  keywords: ["QR code generator", "minimalist QR", "high quality QR", "WiFi QR"],
+  keywords: ["QR code generator", "minimalist QR", "high quality QR", "WiFi QR", "custom QR code", "free QR code maker"],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "QR Forge — High-Fidelity QR Code Generator",
+    description: "Generate precise, high-quality QR codes instantly. No sign-up required.",
+    url: "https://qrcode.ziamuhammad.com",
+    siteName: "QR Forge",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "QR Forge — High-Fidelity QR Code Generator",
+    description: "Generate precise, high-quality QR codes instantly. No sign-up required.",
+    creator: "@QRForge",
+  },
 };
 
 export default function RootLayout({

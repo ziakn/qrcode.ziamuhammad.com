@@ -6,10 +6,9 @@ import { Footer } from "@/components/Footer";
 const slug = "/terms";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — QR Forge",
-  description: "Read our terms of service. Guidelines for using our QR code generation tool and legal agreements.",
-  keywords: ["terms of service", "tos", "user agreement", "usage guidelines", "legal"],
-  alternates: { canonical: slug },
+  title: "Terms of Service — QR Forge Guidelines & Agreements",
+  description: "Read the QR Forge terms of service. Discover the guidelines for using our premium QR code generation tool, legal agreements, and accepted usage policies.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

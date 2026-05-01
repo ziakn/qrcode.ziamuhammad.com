@@ -5,7 +5,8 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Restaurant Menu QR Code Generator — Free & Simple",
-  description: "Create a touchless menu for your restaurant. Generate a QR code that links directly to your PDF or online menu.",
+  description: "Create a touchless digital menu for your restaurant for free. Generate a custom QR code that links directly to your PDF or online menu in seconds.",
+  alternates: { canonical: "/qr-code-for-restaurant-menu" },
 };
 
 export default function RestaurantPage() {

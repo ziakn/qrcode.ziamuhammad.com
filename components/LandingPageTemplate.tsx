@@ -13,18 +13,37 @@ interface LandingPageProps {
 export function LandingPageTemplate({ title, subtitle, content, schema, slug, relatedLinks }: LandingPageProps) {
   const canonicalUrl = `https://qrcode.ziamuhammad.com${slug}`;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://qrcode.ziamuhammad.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": title,
+        "item": canonicalUrl
+      }
+    ]
+  };
+
+  const schemas = schema ? [breadcrumbSchema, schema] : breadcrumbSchema;
+
   return (
     <div className="landing-page">
       {/* SEO & Meta */}
       <link rel="canonical" href={canonicalUrl} />
       
       {/* Schema.org JSON-LD */}
-      {schema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+      />
 
       <div className="landing-hero">
         <nav className="landing-breadcrumb" aria-label="Breadcrumb">

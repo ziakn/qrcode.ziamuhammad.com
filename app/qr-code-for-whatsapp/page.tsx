@@ -4,8 +4,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "WhatsApp QR Code Generator — Chat Instantly",
-  description: "Create a free QR code for WhatsApp. Let customers or friends start a chat with you instantly without saving your number.",
+  title: "WhatsApp QR Code Generator — Start Chats Instantly",
+  description: "Create a free QR code for WhatsApp. Let customers or friends start a chat with you instantly without saving your phone number. Fast and highly reliable.",
+  alternates: { canonical: "/qr-code-for-whatsapp" },
 };
 
 export default function WhatsappPage() {

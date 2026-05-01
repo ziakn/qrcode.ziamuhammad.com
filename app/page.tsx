@@ -12,32 +12,82 @@ import {
 export const metadata: Metadata = {
   title: "Free QR Code Generator — Create High-Quality Custom QR Codes",
   description: "Generate professional, custom QR codes for free with QR Forge. Support for WiFi, vCard, Social Media, and more. No accounts required, high-resolution downloads.",
-  keywords: ["free qr code generator", "custom qr code", "high quality qr code", "wifi qr code", "vcard qr code", "social media qr code", "svg qr code"],
-  alternates: { canonical: "https://qrcode.ziamuhammad.com" },
-  openGraph: {
-    title: "Free QR Code Generator — QR Forge",
-    description: "The most intuitive way to create custom QR codes for your business or personal use.",
-    url: "https://qrcode.ziamuhammad.com",
-    siteName: "QR Forge",
-    type: "website",
-  },
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "QR Forge",
-    "url": "https://qrcode.ziamuhammad.com",
-    "description": "A high-fidelity QR code generation tool supporting multiple data types and custom designs.",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "All",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "QR Forge",
+      "url": "https://qrcode.ziamuhammad.com",
+      "description": "A high-fidelity QR code generation tool supporting multiple data types and custom designs.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://qrcode.ziamuhammad.com",
+      "name": "QR Forge",
+      "logo": "https://qrcode.ziamuhammad.com/favicon.ico"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://qrcode.ziamuhammad.com",
+      "name": "QR Forge",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://qrcode.ziamuhammad.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are these QR codes permanent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our codes are 'static,' meaning the data is encoded directly into the image. They will work as long as the destination URL or data is active."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We believe in a friction-free experience. You can generate as many codes as you want without ever giving us your email."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add my own logo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Use the Advanced options to upload a logo. We recommend using a High error correction level when adding images."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. QR Forge is a free utility. We don't charge for high-resolution downloads or advanced customization features."
+          }
+        }
+      ]
     }
-  };
+  ];
 
   return (
     <>

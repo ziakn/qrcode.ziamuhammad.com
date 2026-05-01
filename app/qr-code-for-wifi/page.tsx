@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import { LandingPageTemplate } from "@/components/LandingPageTemplate";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "WiFi QR Code Generator — Connect Instantly",
+  description: "Create a free WiFi QR code to let guests connect to your network instantly without typing the password. Supports WPA, WEP, and hidden networks securely.",
+  alternates: { canonical: "/qr-code-for-wifi" },
+};
 
 export default function WifiPage() {
   return (

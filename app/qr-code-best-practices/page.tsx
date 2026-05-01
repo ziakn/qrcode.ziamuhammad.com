@@ -5,7 +5,8 @@ import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "QR Code Best Practices — Design & Scanning Guide",
-  description: "Learn how to create QR codes that work every time. Essential tips on size, color contrast, and placement.",
+  description: "Learn how to create high-fidelity QR codes that work perfectly every time. Discover essential tips on ideal sizing, color contrast, and proper placement.",
+  alternates: { canonical: "/qr-code-best-practices" },
 };
 
 export default function BestPracticesPage() {

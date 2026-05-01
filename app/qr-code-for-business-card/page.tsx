@@ -4,8 +4,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Digital Business Card QR Code — vCard Generator",
-  description: "Generate a vCard QR code for your business cards. Save contact details directly to any smartphone with one scan.",
+  title: "Digital Business Card QR Code — Free vCard Generator",
+  description: "Generate a custom vCard QR code for your business cards. Allow clients to save your professional contact details directly to any smartphone with one scan.",
+  alternates: { canonical: "/qr-code-for-business-card" },
 };
 
 export default function BusinessCardPage() {

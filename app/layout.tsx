@@ -38,10 +38,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
-      </head>
-      <body>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-2ZYFSM5SSG"
+          src="https://www.googletagmanager.com/gtag/js?id=G-C0GFBYL9TN"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -50,9 +48,11 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-2ZYFSM5SSG');
+            gtag('config', 'G-C0GFBYL9TN');
           `}
         </Script>
+      </head>
+      <body>
         {children}
       </body>
     </html>

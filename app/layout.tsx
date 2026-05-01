@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     description: "Generate precise, high-quality QR codes instantly. No sign-up required.",
     creator: "@QRForge",
   },
+  other: {
+    "google-adsense-account": "ca-pub-9790243158087298",
+  },
 };
 
 export default function RootLayout({
@@ -51,6 +54,12 @@ export default function RootLayout({
             gtag('config', 'G-C0GFBYL9TN');
           `}
         </Script>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9790243158087298"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body>
         {children}

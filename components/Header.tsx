@@ -27,9 +27,9 @@ export function Header() {
         <nav className="header-nav desktop-only">
           <Link href="/" className="nav-link">Home</Link>
           <Link href="/templates" className="nav-link">Templates</Link>
-          <Link href="/qr-code-types" className="nav-link">Types</Link>
-          <Link href="/how-to-scan-qr-code" className="nav-link">How to Scan</Link>
-          <Link href="/qr-code-size-guide" className="nav-link">Size Guide</Link>
+          <Link href="/blog" className="nav-link">Blog</Link>
+          <Link href="/about-us" className="nav-link">About</Link>
+          <Link href="/contact-us" className="nav-link">Contact</Link>
         </nav>
 
         {/* Mobile Toggle */}
@@ -46,9 +46,9 @@ export function Header() {
           <nav className="mobile-nav-links">
             <Link href="/" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link href="/templates" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Templates</Link>
-            <Link href="/qr-code-types" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Types</Link>
-            <Link href="/how-to-scan-qr-code" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>How to Scan</Link>
-            <Link href="/qr-code-size-guide" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Size Guide</Link>
+            <Link href="/blog" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+            <Link href="/about-us" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>About</Link>
+            <Link href="/contact-us" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>Contact</Link>
           </nav>
         </div>
       </div>

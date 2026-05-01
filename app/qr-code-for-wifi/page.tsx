@@ -7,7 +7,8 @@ export default function WifiPage() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
+          slug="qr-code-for-wifi" 
           title="QR Code for WiFi"
           subtitle="Let your guests connect to your network instantly without typing passwords."
           content={

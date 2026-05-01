@@ -17,7 +17,7 @@ export default function TermsPage() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
           slug={slug}
           title="Terms of Service"
           subtitle="The legal framework for using our platform."

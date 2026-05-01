@@ -95,7 +95,7 @@ export function useQRGenerator() {
               setIsGenerating(false);
             }
           };
-          reader.readAsDataURL(blob);
+          reader.readAsDataURL(blob as Blob);
         }
       } catch (e) {
         if (isMounted) setIsGenerating(false);

@@ -5,7 +5,7 @@ import { ChevronDown, Palette, Layout, Settings2, Image as ImageIcon, X } from "
 import { useState } from "react";
 
 export function QRSettings() {
-  const { settings, setSettings } = useQRStore();
+  const { data, settings, setSettings, setField } = useQRStore();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -131,24 +131,24 @@ export function QRSettings() {
                       return;
                     }
                     const reader = new FileReader();
-                    reader.onload = (ev) => setSettings({ logo: ev.target?.result as string });
+                    reader.onload = (ev) => setField("logo", ev.target?.result as string);
                     reader.readAsDataURL(file);
                   }
                 }}
               />
               <label htmlFor="brand-logo-file" className="premium-upload-btn">
-                {settings.logo ? "Replace Current Logo" : "Choose Logo Image"}
+                {data.logo ? "Replace Current Logo" : "Choose Logo Image"}
               </label>
               
-              {settings.logo && (
+              {data.logo && (
                 <div className="logo-preview-strip">
                   <div className="logo-mini-preview">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={settings.logo} alt="Logo preview" />
+                    <img src={data.logo} alt="Logo preview" />
                   </div>
                   <button 
                     type="button" 
-                    onClick={() => setSettings({ logo: undefined })}
+                    onClick={() => setField("logo", undefined)}
                     className="logo-remove-action"
                   >
                     <X size={14} /> Remove

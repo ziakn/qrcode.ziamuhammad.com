@@ -14,6 +14,7 @@ export default function BestPracticesPage() {
       <Header />
       <main className="main">
         <LandingPageTemplate 
+          slug="qr-code-best-practices"
           title="QR Code Best Practices"
           subtitle="Design for reliability and scan-ability."
           content={

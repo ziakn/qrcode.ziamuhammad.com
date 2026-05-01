@@ -17,7 +17,7 @@ export default function PrivacyPage() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
           slug={slug}
           title="Privacy Policy"
           subtitle="How we handle your data and ensure your privacy."

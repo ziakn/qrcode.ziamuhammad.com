@@ -23,7 +23,7 @@ export default function SizeGuide() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
           slug={slug}
           title="The QR Code Size Guide"
           subtitle="A technical resource for designers, marketers, and business owners."

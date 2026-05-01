@@ -36,7 +36,7 @@ export default function CreateGuide() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
           slug={slug}
           title="The Masterclass: Creating QR Codes"
           subtitle="Everything you need to know to generate, customize, and print high-fidelity QR codes."

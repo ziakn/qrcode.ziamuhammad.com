@@ -8,11 +8,11 @@ import { useQRStore } from "@/lib/store";
 import { useQRGenerator } from "@/hooks/useQRGenerator";
 
 export function QRStudio() {
-  const { settings } = useQRStore();
+  const { data } = useQRStore();
   useQRGenerator();
 
   return (
-    <div className="workspace" data-platform={settings.type}>
+    <div className="workspace" data-platform={data.type}>
       {/* Left: Input panel */}
       <section className="input-panel" aria-label="QR code inputs">
         <TypeSelector />

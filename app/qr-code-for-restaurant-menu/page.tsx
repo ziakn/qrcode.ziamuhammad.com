@@ -13,7 +13,8 @@ export default function RestaurantPage() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
+          slug="qr-code-for-restaurant-menu" 
           title="QR Codes for Restaurants"
           subtitle="A safer, faster dining experience."
           content={

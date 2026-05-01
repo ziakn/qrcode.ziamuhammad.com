@@ -35,7 +35,7 @@ export default function ScanGuide() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
           slug={slug}
           title="The Definitive Guide to Scanning"
           subtitle="Everything you need to know about scanning QR codes on any modern device."

@@ -20,7 +20,8 @@ export default function BusinessCardPage() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
+          slug="qr-code-for-business-card" 
           title="Business Card QR Codes"
           subtitle="Upgrade your physical card to a digital experience."
           schema={schema}

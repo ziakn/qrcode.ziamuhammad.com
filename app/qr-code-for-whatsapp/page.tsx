@@ -24,7 +24,8 @@ export default function WhatsappPage() {
     <>
       <Header />
       <main className="main">
-        <LandingPageTemplate 
+        <LandingPageTemplate
+          slug="qr-code-for-whatsapp" 
           title="QR Code for WhatsApp"
           subtitle="The easiest way to start a conversation."
           schema={schema}

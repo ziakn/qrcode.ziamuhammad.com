@@ -4,15 +4,40 @@ import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import { BLOG_POSTS } from "@/lib/blog";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "QR Forge Blog",
+  "description": "Technical guides, industry insights, and marketing strategies for QR codes.",
+  "url": "https://qrcode.ziamuhammad.com/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "QR Forge",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://qrcode.ziamuhammad.com/icon.svg"
+    }
+  }
+};
+
 export const metadata: Metadata = {
   title: "QR Forge Blog — Insights & Best Practices",
   description: "Read the latest insights, technical guides, and marketing strategies for utilizing QR codes effectively in your business.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    type: "website",
+    title: "QR Forge Blog — Insights & Best Practices",
+    description: "Read the latest insights, technical guides, and marketing strategies for utilizing QR codes effectively in your business.",
+  },
 };
 
 export default function BlogIndexPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Header />
       <main className="main">
         <div className="landing-page">

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     creator: "@QRForge",
   },
   verification: {
-    google: "google-site-verification-placeholder", // Replace with actual code if provided
+    google: "google-site-verification-placeholder", // Replace with actual code from Google Search Console
   },
   other: {
     "google-adsense-account": "ca-pub-9790243158087298",
@@ -61,6 +61,24 @@ export default function RootLayout({
     }
   };
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "QR Forge",
+    "description": "A free, high-quality QR code generator with no sign-up required.",
+    "brand": {
+      "@type": "Brand",
+      "name": "QR Forge"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://qrcode.ziamuhammad.com"
+    }
+  };
+
   return (
     <html lang="en">
       <head>
@@ -73,7 +91,7 @@ export default function RootLayout({
           id="schema-org"
           type="application/ld+json"
           strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema, productSchema]) }}
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-C0GFBYL9TN"

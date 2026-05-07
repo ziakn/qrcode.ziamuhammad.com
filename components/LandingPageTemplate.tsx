@@ -5,7 +5,7 @@ interface LandingPageProps {
   title: string;
   subtitle: string;
   content: React.ReactNode;
-  schema?: object;
+  schema?: object | object[];
   slug: string;
   category?: string;
   categoryHref?: string;
@@ -42,7 +42,11 @@ export function LandingPageTemplate({ title, subtitle, content, schema, slug, ca
     "itemListElement": breadcrumbElements
   };
 
-  const schemas = schema ? [breadcrumbSchema, schema] : breadcrumbSchema;
+  const schemas = schema 
+    ? Array.isArray(schema) 
+      ? [breadcrumbSchema, ...schema] 
+      : [breadcrumbSchema, schema]
+    : breadcrumbSchema;
 
   return (
     <div className="landing-page">

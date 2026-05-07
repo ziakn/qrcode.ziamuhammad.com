@@ -39,6 +39,8 @@ export default function CreateGuide() {
           slug={slug}
           title="The Masterclass: Creating QR Codes"
           subtitle="Everything you need to know to generate, customize, and print high-fidelity QR codes."
+          category="Guide"
+          categoryHref="/qr-code-types"
           relatedLinks={related}
           schema={schema}
           content={

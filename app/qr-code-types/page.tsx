@@ -29,18 +29,46 @@ const TYPES = [
   { id: "map", title: "GPS Location", icon: <MapPin size={24} />, desc: "Encode coordinates to launch maps instantly." },
   { id: "video", title: "Video Meeting", icon: <Video size={24} />, desc: "Direct links to Zoom, Meet, or Teams sessions." },
 ];
-
 export default function TypesPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "QR Code Types & Formats",
+    "description": "Explore all supported QR code types including URL, WiFi, vCard, and Social Media.",
+    "breadcrumb": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://qrcode.ziamuhammad.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Types",
+          "item": "https://qrcode.ziamuhammad.com/qr-code-types"
+        }
+      ]
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Header />
       <main className="main">
         <div className="landing-hero">
-          <div className="landing-breadcrumb">
+          <nav className="landing-breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link>
-            <ChevronRight size={12} />
-            <span>Types</span>
-          </div>
+            <ChevronRight size={12} aria-hidden="true" />
+            <span aria-current="page">Types</span>
+          </nav>
           <h1 className="landing-title">QR Code Types & Formats</h1>
           <p className="landing-subtitle">Every digital standard supported by our generation engine.</p>
         </div>

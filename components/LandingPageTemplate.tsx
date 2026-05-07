@@ -7,29 +7,39 @@ interface LandingPageProps {
   content: React.ReactNode;
   schema?: object;
   slug: string;
+  category?: string;
+  categoryHref?: string;
   relatedLinks?: { title: string; href: string }[];
 }
 
-export function LandingPageTemplate({ title, subtitle, content, schema, slug, relatedLinks }: LandingPageProps) {
+export function LandingPageTemplate({ title, subtitle, content, schema, slug, category = "Guide", categoryHref = "/qr-code-types", relatedLinks }: LandingPageProps) {
   const canonicalUrl = `https://qrcode.ziamuhammad.com${slug}`;
+
+  const breadcrumbElements = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://qrcode.ziamuhammad.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": category,
+      "item": `https://qrcode.ziamuhammad.com${categoryHref}`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": title,
+      "item": canonicalUrl
+    }
+  ];
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://qrcode.ziamuhammad.com/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": title,
-        "item": canonicalUrl
-      }
-    ]
+    "itemListElement": breadcrumbElements
   };
 
   const schemas = schema ? [breadcrumbSchema, schema] : breadcrumbSchema;
@@ -49,7 +59,9 @@ export function LandingPageTemplate({ title, subtitle, content, schema, slug, re
         <nav className="landing-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
           <ChevronRight size={12} aria-hidden="true" />
-          <span>Guide</span>
+          <Link href={categoryHref}>{category}</Link>
+          <ChevronRight size={12} aria-hidden="true" />
+          <span aria-current="page">{title}</span>
         </nav>
         <h1 className="landing-title">{title}</h1>
         <p className="landing-subtitle">{subtitle}</p>

@@ -18,6 +18,8 @@ export default function BestPracticesPage() {
           slug="qr-code-best-practices"
           title="QR Code Best Practices"
           subtitle="Design for reliability and scan-ability."
+          category="Guide"
+          categoryHref="/qr-code-types"
           content={
             <>
               <h2>1. Maintain High Contrast</h2>

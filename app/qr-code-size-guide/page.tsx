@@ -26,6 +26,8 @@ export default function SizeGuide() {
           slug={slug}
           title="The QR Code Size Guide"
           subtitle="A technical resource for designers, marketers, and business owners."
+          category="Guide"
+          categoryHref="/qr-code-types"
           relatedLinks={related}
           content={
             <div className="editorial-content">

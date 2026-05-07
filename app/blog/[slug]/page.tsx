@@ -44,10 +44,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "headline": post.title,
     "description": post.description,
     "datePublished": post.date,
+    "dateModified": post.date, // Assuming same for now, can be updated if data supports it
     "author": {
       "@type": "Person",
-      "name": post.author
-    }
+      "name": post.author,
+      "url": "https://qrcode.ziamuhammad.com/about-us"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "QR Forge",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://qrcode.ziamuhammad.com/icon.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://qrcode.ziamuhammad.com/blog/${post.slug}`
+    },
+    "image": "https://qrcode.ziamuhammad.com/icon.svg" // Placeholder or brand image
   };
 
   return (
@@ -58,6 +73,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           slug={`/blog/${post.slug}`}
           title={post.title}
           subtitle={`Published on ${new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`}
+          category="Blog"
+          categoryHref="/blog"
           schema={schema}
           content={
             <div 

@@ -1,6 +1,19 @@
 import Script from "next/script";
 import type { Metadata } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://qrcode.ziamuhammad.com"),
@@ -18,11 +31,20 @@ export const metadata: Metadata = {
     siteName: "QR Forge",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image",
+        width: 1200,
+        height: 630,
+        alt: "QR Forge - Free QR Code Generator",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "QR Forge — High-Fidelity QR Code Generator",
     description: "Generate precise, high-quality QR codes instantly. No sign-up required.",
+    images: ["/og-image"],
     creator: "@QRForge",
   },
   verification: {
@@ -80,13 +102,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <head>
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
         <Script
           id="schema-org"
           type="application/ld+json"
@@ -94,23 +113,24 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema, productSchema]) }}
         />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-C0GFBYL9TN"
+          id="google-analytics"
           strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-C0GFBYL9TN`}
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics-inline" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', 'G-C0GFBYL9TN');
           `}
         </Script>
+        {/* Google AdSense - lazy loaded to prevent CLS */}
         <Script
-          async
+          id="adsense-lazy"
+          strategy="lazyOnload"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9790243158087298"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
       <body>

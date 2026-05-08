@@ -98,8 +98,8 @@ export default function Home() {
       <Header />
       <main className="main">
         <section className="hero">
-          <h1 className="hero-title">Free QR Code Generator</h1>
-          <p className="hero-sub">The most intuitive way to create high-fidelity QR codes for your business or personal projects.</p>
+          <h1 className="hero-title">Free QR Code Generator — High-Fidelity & No Sign-Up</h1>
+          <p className="hero-sub">The most intuitive way to create high-fidelity QR codes for your business or personal projects. Editorial-grade output with pixel-perfect reliability.</p>
         </section>
 
         <QRStudio />

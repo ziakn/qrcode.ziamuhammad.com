@@ -28,6 +28,14 @@ export const metadata: Metadata = {
     type: "website",
     title: "QR Forge Blog — Insights & Best Practices",
     description: "Read the latest insights, technical guides, and marketing strategies for utilizing QR codes effectively in your business.",
+    images: [
+      {
+        url: "/og-image",
+        width: 1200,
+        height: 630,
+        alt: "QR Forge Blog - Insights and Best Practices",
+      },
+    ],
   },
 };
 

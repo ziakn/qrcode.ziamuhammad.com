@@ -12,10 +12,28 @@ export const metadata: Metadata = {
 };
 
 export default function ContactUsPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact QR Forge",
+    "description": "Contact QR Forge support for assistance with QR code generation.",
+    "url": "https://qrcode.ziamuhammad.com/contact-us",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "QR Forge Support",
+      "email": "hello@qrcode.ziamuhammad.com",
+      "url": "https://qrcode.ziamuhammad.com"
+    }
+  };
+
   return (
     <>
       <Header />
       <main className="main">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
         <LandingPageTemplate
           slug={slug}
           title="Contact Us"

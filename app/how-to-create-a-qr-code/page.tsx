@@ -9,6 +9,18 @@ export const metadata: Metadata = {
   title: "How to Create a QR Code — Step-by-Step Guide 2024",
   description: "Learn how to make a high-quality QR code for free. This comprehensive guide covers choosing a type, customizing the design, and downloading for print.",
   alternates: { canonical: "/how-to-create-a-qr-code" },
+  openGraph: {
+    title: "How to Create a QR Code — Step-by-Step Guide",
+    description: "Learn how to make a high-quality QR code for free with our comprehensive guide.",
+    images: [
+      {
+        url: "/og-image",
+        width: 1200,
+        height: 630,
+        alt: "How to Create a QR Code Guide",
+      },
+    ],
+  },
 };
 
 export default function CreateGuide() {

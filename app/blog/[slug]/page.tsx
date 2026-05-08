@@ -26,7 +26,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.description,
       publishedTime: post.date,
       authors: [post.author],
-    }
+      images: [
+        {
+          url: "/og-image",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
   };
 }
 
@@ -91,10 +99,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     },
     "image": {
       "@type": "ImageObject",
-      "url": "https://qrcode.ziamuhammad.com/icon.svg",
+      "url": "https://qrcode.ziamuhammad.com/og-image",
       "width": 1200,
       "height": 630
     },
+    "articleBody": post.content.replace(/<[^>]*>/g, '').slice(0, 5000),
     "keywords": "QR code, QR generator, digital marketing, technology"
   };
 

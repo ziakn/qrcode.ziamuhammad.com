@@ -59,7 +59,7 @@ export function QRPreview() {
             <img
               ref={imgRef}
               src={qrDataUrl}
-              alt="Generated QR Code"
+              alt={`QR code for ${buildQRContent() || 'your content'}`}
               className="qr-image"
               width={settings.size}
               height={settings.size}

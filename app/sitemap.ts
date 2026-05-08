@@ -24,6 +24,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: "/qr-code-types", priority: 0.9, changeFrequency: "weekly" as const },
     { route: "/templates", priority: 0.8, changeFrequency: "monthly" as const },
     { route: "/terms", priority: 0.6, changeFrequency: "yearly" as const },
+    // Template pages
+    { route: "/google-reviews", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/event-rsvp", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/payment-link", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/instagram-profile", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/linkedin-profile", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/facebook-page", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/twitter-profile", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/youtube-channel", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/app-store", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/google-maps", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/zoom-meeting", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/phone-call", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/paypal-me", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/tiktok-profile", priority: 0.7, changeFrequency: "monthly" as const },
+    { route: "/snapchat", priority: 0.7, changeFrequency: "monthly" as const },
   ];
 
   const staticUrls = staticRoutes.map(({ route, priority, changeFrequency }) => ({

@@ -16,7 +16,6 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       "https://qrcode.ziamuhammad.com/sitemap.xml",
-      "https://qrcode.ziamuhammad.com/sitemap-index.xml",
     ],
     host: "qrcode.ziamuhammad.com",
   };

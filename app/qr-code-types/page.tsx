@@ -13,6 +13,19 @@ export const metadata: Metadata = {
   title: "QR Code Types — Explore 20+ Supported Formats",
   description: "Explore all supported QR code types including URL, WiFi, vCard, and Social Media. Discover the absolute best format for your personal or business needs.",
   alternates: { canonical: "/qr-code-types" },
+  openGraph: {
+    type: "website",
+    title: "QR Code Types — Explore All Supported Formats",
+    description: "Explore all supported QR code types including URL, WiFi, vCard, and Social Media.",
+    images: [
+      {
+        url: "/og-image",
+        width: 1200,
+        height: 630,
+        alt: "QR Code Types Guide",
+      },
+    ],
+  },
 };
 
 const TYPES = [

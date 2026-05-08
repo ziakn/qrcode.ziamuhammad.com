@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
-import { Home, ArrowLeft, Search } from "lucide-react";
+import { Home, Search } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "404 — Page Not Found",
@@ -66,14 +66,6 @@ export default function NotFound() {
               <Search size={18} />
               Browse Templates
             </Link>
-            <button
-              onClick={() => window.history.back()}
-              className="btn-secondary"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-            >
-              <ArrowLeft size={18} />
-              Go Back
-            </button>
           </div>
 
           <div style={{

@@ -25,10 +25,16 @@ export default function Home() {
       "description": "A high-fidelity QR code generation tool supporting multiple data types and custom designs.",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Zia Muhammad",
+        "url": "https://www.ziamuhammad.com"
       }
     },
     {

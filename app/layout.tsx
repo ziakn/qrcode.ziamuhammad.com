@@ -24,6 +24,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "QR Forge — High-Fidelity QR Code Generator",
     description: "Generate precise, high-quality QR codes instantly. No sign-up required.",
